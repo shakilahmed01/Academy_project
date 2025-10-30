@@ -26,9 +26,40 @@ class CustomerController extends Controller
     public function index()
     {
         $pageTitle = "Add Customer";
-        $pageTitle2 = "Add Customer2";
-        $customers = Customer::all();
+        return view('customer.index',compact('pageTitle'));
+    }
 
-        return view('customer.index',compact('pageTitle','pageTitle2','customers'));
+    public function list()
+    {
+        $pageTitle = "list Customer";
+        $customers = Customer::latest()->paginate(3);
+        return view('customer.list',compact('pageTitle','customers'));
+    }
+
+    public function edit($id)
+    {
+        $pageTitle = "Customer Edit";
+        $edit = Customer::find($id);
+        return view('customer.edit',compact('pageTitle','edit'));
+    }
+
+    public function update(Request $request)
+    {
+        $update = Customer::find($request->id);
+        $update->name = $request->name;
+        $update->email = $request->email;
+        $update->phone = $request->phone;
+        $update->address = $request->address;
+
+        $update->save();
+
+        return back();
+    }
+
+    public function delete($id)
+    {
+        $delete = Customer::find($id);
+        $delete->delete();
+        return redirect()->route('customer.list');
     }
 }

@@ -1,22 +1,24 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <h3>Add Customer</h3>
+                    <h3>Edit Customer</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('customer.create') }}" method="post">
+                    <form action="{{ route('customer.update') }}" method="post">
                         @csrf
+                        <input type="hidden" name="id" value="{{$edit->id}}">
                         <div class="form-group">
                             <div class="form-label">Name</div>
                             <input
                                 type="text"
                                 class="form-control"
                                 name="name"
-                                placeholder="Enter your name"
+                                value="{{$edit->name}}"
                             />
                         </div>
                         <div class="form-group">
@@ -25,7 +27,7 @@
                                 type="text"
                                 class="form-control"
                                 name="email"
-                                placeholder="Enter email"
+                                value="{{$edit->email}}"
                             />
                         </div>
                         <div class="form-group">
@@ -34,7 +36,7 @@
                                 type="text"
                                 class="form-control"
                                 name="phone"
-                                placeholder="Enter phone"
+                                value="{{$edit->phone}}"
                             />
                         </div>
                         <div class="form-group">
@@ -43,7 +45,7 @@
                                 type="text"
                                 class="form-control"
                                 name="address"
-                            ></textarea>
+                            >{{$edit->address}}</textarea>
                         </div>
                         <button
                             type="submit"
