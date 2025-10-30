@@ -45,6 +45,9 @@ class CustomerController extends Controller
 
     public function update(Request $request)
     {
+         $request->validate([
+                'id' => 'required|integer|exists:customers,id'                       
+         ]);
         $update = Customer::find($request->id);
         $update->name = $request->name;
         $update->email = $request->email;
@@ -53,7 +56,7 @@ class CustomerController extends Controller
 
         $update->save();
 
-        return back();
+        return back()->with('success','Customer updated successful!');
     }
 
     public function delete($id)
