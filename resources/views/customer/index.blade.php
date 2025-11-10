@@ -4,6 +4,18 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
+                @if(session('success')) 
+                <p class="alert alert-success"> 
+                    <p class="text-black">{{ session('success') }}</p> 
+                </div> 
+                @endif 
+                @if($errors->any()) 
+                <div class="alert alert-danger"> 
+                    <ul style="margin: 0;"> @foreach($errors->all() as $error) 
+                        <li>{{$error}}</li> @endforeach 
+                    </ul>   
+                </div> 
+                @endif
                 <div class="card-header bg-primary text-white">
                     <h3>Add Customer</h3>
                 </div>

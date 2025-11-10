@@ -2,24 +2,24 @@
 
 @section('content')
 <div class="container">
-    @if(session('success'))
-    <div class="alert alert-success">
-       {{ session('sucess') }}
-    </div>
-    @endif
-
-    @if($errors->any())
-    <div class="alert alert-danger">
-        <ul style="margin: 0;">
-            @foreach($errors->all() as $error)
-                <li>{{$errror}}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            <p class="text-black">{{ session('success') }}</p>
+                        </div>
+                    @endif
+
+                    @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul style="margin: 0;">
+                            @foreach($errors->all() as $error)
+                                <li>{{$errror}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                 <div class="card-header bg-primary text-white">
                     <h3>Edit Customer</h3>
                 </div>

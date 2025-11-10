@@ -10,6 +10,14 @@ class CustomerController extends Controller
 {
     public function create(Request $data)
     {
+        $data->validate([
+            "name" => 'required|string',
+            "email" => 'required|email|unique:customers,email',
+            "phone" => 'required|string|max:20',
+            "address" => 'required|string|max:255',
+          ]
+        );
+        
         $customers = new Customer();
 
         $customers->name = $data->name;
@@ -20,7 +28,7 @@ class CustomerController extends Controller
         $customers->save();
 
 
-        return back();
+        return back()->with('success', 'Customer added successful!');
     }
 
     public function index()
@@ -63,6 +71,6 @@ class CustomerController extends Controller
     {
         $delete = Customer::find($id);
         $delete->delete();
-        return redirect()->route('customer.list');
+        return redirect()->route('customer.list')->with('success','Customer deleted successful!');
     }
 }

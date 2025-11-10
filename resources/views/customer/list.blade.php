@@ -6,6 +6,11 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
+                @if(session('success')) 
+                <p class="alert alert-success"> 
+                    <p class="text-black">{{ session('success') }}</p> 
+                </div> 
+                @endif
                 <div class="card-header bg-success">
                     <h3>Customer List</h3>
                 </div>
